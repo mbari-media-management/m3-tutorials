@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker stop anno && docker rm anno
+docker stop jupyter
