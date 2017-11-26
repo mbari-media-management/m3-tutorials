@@ -2,7 +2,8 @@
 
 APP_HOME="$( cd "$(dirname "$0")/.." ; pwd -P )"
 
-sudo -R chown 1000 $APP_HOME/notebooks
+sudo chgrp -R 1000 $APP_HOME/notebooks
+sudo chmod g+w $APP_HOME/notebooks
 
 docker network create m3net
 
