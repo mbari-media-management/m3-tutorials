@@ -2,19 +2,21 @@
 
 APP_HOME="$( cd "$(dirname "$0")/.." ; pwd -P )"
 
-sudo chgrp -R 1000 $APP_HOME/notebooks
+sudo chgrp -R 100 $APP_HOME/notebooks
 sudo chmod g+w $APP_HOME/notebooks
 
-docker network create m3net
 
 docker run -d \
   --name=anno \
-  --net m3net \
   -p 8080:8080 \
   mbari/annosaurus
 
 docker run -it --rm -p 8888:8888 \
   --name=jupyter \
-  --net m3net \
-  -v $APP_HOME/notebooks:/home/jovyan/work \
+  -v $APP_HOME/notebooks:/home/jovyan/work:rw \
   jupyter/scipy-notebook
+
+
+  # --user root \
+  # -e NB_GID=`(id -g $USER)`
+  # -e NB_UD
