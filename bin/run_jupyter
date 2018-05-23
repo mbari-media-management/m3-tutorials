@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-APP_HOME="$( cd "$(dirname "$0")/.." ; pwd -P )"
-
-cd $APP_HOME/docker/jupyter
-docker build -t m3tutorial/jupyter .
-
-docker run --name m3-jupyter -p 8888:8888 -v $APP_HOME/notebooks:/notebook m3tutorial/jupyter
