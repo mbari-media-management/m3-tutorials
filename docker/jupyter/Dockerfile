@@ -14,24 +14,23 @@ RUN curl -qsSLkO \
 
 ENV PATH=/root/miniconda3/bin:$PATH
 
-RUN conda install -y \
-    h5py \
-    pandas \
-    jupyter \
-    matplotlib \
-    seaborn \
-    scikit-learn \
-    pandas
+RUN conda config --append channels conda-forge && \
+    conda install -y \
+      h5py \
+      pandas \
+      jupyter \
+      matplotlib \
+      seaborn \
+      scikit-learn \
+      pandas \
+      tensorflow \
+      keras && \
+    conda clean --yes --tarballs --packages --source-cache
 
-RUN conda config --append channels conda-forge
-
-RUN conda install -y tensorflow keras
-
-RUN conda clean --yes --tarballs --packages --source-cache
-
-RUN apt-get update && apt-get install -y graphviz xvfb python-opengl
-RUN pip install --upgrade pip && \
-  pip install graphviz xgboost
+RUN apt-get update && apt-get install -y graphviz xvfb python-opengl && \
+    pip install --upgrade pip && \
+    pip install graphviz
+  # pip install graphviz xgboost
 
 VOLUME /notebook
 WORKDIR /notebook
