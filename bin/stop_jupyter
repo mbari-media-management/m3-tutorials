@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 docker stop m3-jupyter && \
-    docker rm m3-jupyter
+    docker rm -f m3-jupyter
 
 

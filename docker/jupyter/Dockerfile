@@ -23,6 +23,8 @@ RUN conda config --append channels conda-forge && \
       seaborn \
       scikit-learn \
       pandas \
+      ipywidgets \
+      beakerx \
       tensorflow \
       keras && \
     conda clean --yes --tarballs --packages --source-cache
