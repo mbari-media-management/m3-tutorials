@@ -19,6 +19,7 @@ RUN conda config --append channels conda-forge && \
       h5py \
       pandas \
       jupyter \
+      jupyterlab \
       matplotlib \
       seaborn \
       scikit-learn \
@@ -38,4 +39,4 @@ VOLUME /notebook
 WORKDIR /notebook
 EXPOSE 8888
 
-CMD xvfb-run -s "-screen 0 1400x900x24" jupyter notebook --allow-root --no-browser --ip=0.0.0.0 --NotebookApp.token=
+CMD xvfb-run -s "-screen 0 1400x900x24" jupyter lab --allow-root --no-browser --ip=0.0.0.0 --NotebookApp.token=
