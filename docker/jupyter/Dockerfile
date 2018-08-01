@@ -1,10 +1,19 @@
 FROM ubuntu
 
 RUN apt-get update \
+  && apt-get dist-upgrade -y \
   && apt-get install -y --no-install-recommends \
+    apt-transport-https \
+    apt-utils \
     build-essential \
-    curl \
     cmake \
+    curl \
+    npm \
+    software-properties-common \
+    unzip \
+  && apt-add-repository ppa:openjdk-r/ppa \
+  && apt-get install -y --no-install-recommends \
+    openjdk-8-jdk \
   && rm -rf /var/lib/apt/lists/*
 
 RUN curl -qsSLkO \
@@ -14,25 +23,31 @@ RUN curl -qsSLkO \
 
 ENV PATH=/root/miniconda3/bin:$PATH
 
-RUN conda config --append channels conda-forge && \
-    conda install -y \
+RUN conda config --append channels conda-forge \
+  && conda install -y \
+      beakerx \
       h5py \
-      pandas \
+      ipywidgets \
       jupyter \
       jupyterlab \
+      keras \
       matplotlib \
-      seaborn \
-      scikit-learn \
+      netcdf4 \
       pandas \
-      ipywidgets \
-      beakerx \
+      scikit-learn \
+      seaborn \
       tensorflow \
-      keras && \
-    conda clean --yes --tarballs --packages --source-cache
+  && conda update conda \
+  && conda clean --yes --tarballs --packages --source-cache
 
-RUN apt-get update && apt-get install -y graphviz xvfb python-opengl && \
-    pip install --upgrade pip && \
-    pip install graphviz
+RUN beakerx install \
+  && jupyter labextension install @jupyter-widgets/jupyterlab-manager
+
+RUN apt-get update \
+  && apt-get install -y graphviz xvfb python-opengl \
+  && pip install --upgrade pip \
+  && pip install graphviz \
+  && rm -rf /var/lib/apt/lists/*
   # pip install graphviz xgboost
 
 VOLUME /notebook
