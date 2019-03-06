@@ -30,15 +30,14 @@ RUN conda config --append channels conda-forge \
       ipywidgets \
       jupyter \
       jupyterlab \
-      keras \
       matplotlib \
       netcdf4 \
       pandas \
       scikit-learn \
       seaborn \
-      tensorflow \
   && conda update conda \
-  && conda clean --yes --tarballs --packages --source-cache
+  && conda clean --yes --tarballs --packages \
+  && conda build purge-all
 
 RUN beakerx install \
   && jupyter labextension install @jupyter-widgets/jupyterlab-manager
