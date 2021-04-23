@@ -1,0 +1,17 @@
+name: m3-tutorials
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7
+  - beakerx
+  - h5py
+  - ipywidgets
+  - jupyter
+  - jupyterlab
+  - matplotlib
+  - netcdf4
+  - pandas
+  - requests
+  - scikit-learn
+  - seaborn
+  - tornado<6
