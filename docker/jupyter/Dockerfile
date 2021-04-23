@@ -30,11 +30,10 @@ RUN conda config --append channels conda-forge \
       ipywidgets \
       jupyter \
       jupyterlab \
-      matplotlib \
       netcdf4 \
       pandas \
+      requests \
       scikit-learn \
-      seaborn \
   && conda update conda \
   && conda clean --yes --tarballs --packages \
   && conda build purge-all
